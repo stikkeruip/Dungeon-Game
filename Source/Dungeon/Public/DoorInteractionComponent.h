@@ -23,11 +23,14 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	FRotator DesiredRotation = FRotator::ZeroRotator;
-	FRotator StartRotation = FRotator::ZeroRotator;
-	FRotator FinalRotation = FRotator::ZeroRotator;
+	FRotator Start = FRotator::ZeroRotator;
+	FRotator Opened = FRotator::ZeroRotator;
+	FRotator Closed = FRotator::ZeroRotator;
+	FRotator CurrentRotation = FRotator::ZeroRotator;
+
 
 	UPROPERTY(EditAnywhere)
-	float TimeToRotate = 1.0f;
+	float TimeToRotate;
 	float CurrentRotationTime = 0.0f;
 
 	UPROPERTY(EditAnywhere)

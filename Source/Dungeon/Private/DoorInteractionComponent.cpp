@@ -23,8 +23,8 @@ UDoorInteractionComponent::UDoorInteractionComponent()
 void UDoorInteractionComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	StartRotation = GetOwner()->GetActorRotation();
-	FinalRotation = GetOwner()->GetActorRotation() + DesiredRotation;
+	Start = GetOwner()->GetActorRotation();
+	Opened = GetOwner()->GetActorRotation() + DesiredRotation;
 	CurrentRotationTime = 0.0f;
 
 	// ...
@@ -35,27 +35,24 @@ void UDoorInteractionComponent::BeginPlay()
 // Called every frame
 void UDoorInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
+	CurrentRotation = GetOwner()->GetActorRotation();
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (CurrentRotationTime < TimeToRotate)
+	if (TriggerBox && GetWorld() && GetWorld()->GetFirstLocalPlayerFromController())
 	{
-		if (TriggerBox && GetWorld() && GetWorld()->GetFirstLocalPlayerFromController())
+		APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+		if (PlayerPawn && TriggerBox->IsOverlappingActor(PlayerPawn))
 		{
-			APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-			if (PlayerPawn && TriggerBox->IsOverlappingActor(PlayerPawn))
-			{
-				CurrentRotationTime += DeltaTime;
-				const float RotationAlpha = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
-				const FRotator CurrentRotation = FMath::Lerp(StartRotation, FinalRotation, RotationAlpha);
-				GetOwner()->SetActorRotation(CurrentRotation);
-			}
-			else if (PlayerPawn && !TriggerBox->IsOverlappingActor(PlayerPawn))
-			{
-				FRotator Temp = FinalRotation;
-				CurrentRotationTime += DeltaTime;
-				const float RotationAlpha = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
-				const FRotator CurrentRotation = FMath::Lerp(FinalRotation, StartRotation, RotationAlpha);
-				GetOwner()->SetActorRotation(CurrentRotation);
-			}
+			CurrentRotationTime += DeltaTime;
+			const float RotationAlpha = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
+			const FRotator CurrentRotation = FMath::Lerp(CurrentRotation, Opened, RotationAlpha);
+			GetOwner()->SetActorRotation(CurrentRotation);
+		}
+		else if (PlayerPawn && !TriggerBox->IsOverlappingActor(PlayerPawn) && GetOwner()->GetActorRotation() != Start)
+		{
+			CurrentRotationTime += DeltaTime;
+			const float RotationAlpha = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
+			const FRotator CurrentRotation = FMath::Lerp(CurrentRotation, Closed, RotationAlpha);
+			GetOwner()->SetActorRotation(CurrentRotation);
 		}
 	}
 	// ...
