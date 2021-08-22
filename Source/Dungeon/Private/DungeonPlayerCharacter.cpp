@@ -2,6 +2,7 @@
 
 #include "DungeonPlayerCharacter.h"
 
+class APlayerController;
 
 // Sets default values
 ADungeonPlayerCharacter::ADungeonPlayerCharacter()
