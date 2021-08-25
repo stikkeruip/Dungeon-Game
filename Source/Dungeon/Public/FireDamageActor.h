@@ -27,5 +27,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	UPROPERTY(EditAnywhere)
 	UDealDamageComponent* DealDamageComponent;
-	UParticleSystem* ParticleSystemComponent;
+	UParticleSystemComponent* ParticleSystemComponent;
 };

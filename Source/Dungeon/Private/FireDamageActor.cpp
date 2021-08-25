@@ -17,7 +17,7 @@ AFireDamageActor::AFireDamageActor()
 	{
 		RootComponent = DealDamageComponent->GetTriggerCapsule();
 	}
-	ParticleSystemComponent = CreateDefaultSubobject<UParticleSystem>(TEXT("Particle System"));
+	ParticleSystemComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particle System"));
 	ParticleSystemComponent->SetupAttachment(RootComponent);
 }
 
