@@ -28,4 +28,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	UDealDamageComponent* DealDamageComponent;
 	UParticleSystemComponent* ParticleSystemComponent;
+
+	float ToggleTime = 5.0f;
+
+	float CurrentTimer = 0.0f;
 };

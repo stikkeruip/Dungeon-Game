@@ -22,7 +22,8 @@ public:
 
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-	
+
+	UCapsuleComponent* GetTriggerCapsule() const { return TriggerCapsule; }
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
