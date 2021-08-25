@@ -2,6 +2,8 @@
 
 #include "DungeonPlayerCharacter.h"
 
+#include "HealthComponent.h"
+#include "GameFramework/PlayerController.h"
 
 // Sets default values
 ADungeonPlayerCharacter::ADungeonPlayerCharacter()
@@ -9,13 +11,13 @@ ADungeonPlayerCharacter::ADungeonPlayerCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 }
 
 // Called when the game starts or when spawned
 void ADungeonPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -28,14 +30,34 @@ void ADungeonPlayerCharacter::Tick(float DeltaTime)
 void ADungeonPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ADungeonPlayerCharacter::FellOutOfWorld(const class UDamageType& dmgType)
 {
+	OnDeath(true);
+}
+
+float ADungeonPlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float Damage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	UE_LOG(LogTemp, Warning, TEXT("ADungeonPlayerCharacter::TakeDamage Damage %.2f"), Damage);
+	if(HealthComponent)
+	{
+		HealthComponent->TakeDamage(Damage);
+		if(HealthComponent->IsDead())
+		{
+			OnDeath(false);
+		}
+	}
+	return Damage;
+}
+
+void ADungeonPlayerCharacter::OnDeath(bool IsFellOut)
+{
 	APlayerController* PlayerController = GetController<APlayerController>();
-	if (PlayerController)
+	if(PlayerController)
 	{
 		PlayerController->RestartLevel();
 	}
 }
+

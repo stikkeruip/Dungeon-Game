@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "DungeonPlayerCharacter.generated.h"
 
+class UHealthComponent;
 UCLASS()
 class DUNGEON_API ADungeonPlayerCharacter : public ACharacter
 {
@@ -19,6 +20,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void OnDeath(bool IsFellOut);
+
+	UPROPERTY(EditAnywhere)
+	UHealthComponent* HealthComponent;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -27,5 +33,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void FellOutOfWorld(const class UDamageType& dmgType) override;
-	
+
+	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 };
