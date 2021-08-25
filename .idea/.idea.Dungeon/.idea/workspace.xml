@@ -18,13 +18,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Private/HealthComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Games/UE_5.0EA/Engine/Source/Runtime/AnimGraphRuntime/Public/AnimNodes/AnimNode_RandomPlayer.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Public/DungeonPlayerController.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Public/DungeonPlayerCharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Dungeon/Public/HealthComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Private/DungeonPlayerController.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Dungeon/Private/DungeonPlayerCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Public/DungeonPlayerCharacter.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/Games/UE_5.0EA/Engine/Source/Runtime/AnimGraphRuntime/Public/AnimNodes/AnimNode_RandomPlayer.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Private/HealthComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Private/DungeonPlayerController.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Dungeon/Public/DungeonPlayerController.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1wxDHhIspZN4arHscu41FzfKpZB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -194,16 +194,6 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
       </configuration_15>
-      <configuration_16>
-        <option name="CONFIGURATION" value="" />
-        <option name="PLATFORM" value="" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/Dungeon.vcxproj" />
-        <option name="EXE_PATH" value="$(TargetPath)" />
-        <option name="PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="$(ProjectDir)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_16>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/Dungeon.vcxproj" />
       <method v="2">
         <option name="Build" />
@@ -278,6 +268,8 @@
       <workItem from="1629878907122" duration="4652000" />
       <workItem from="1629884904991" duration="415000" />
       <workItem from="1629891036900" duration="345000" />
+      <workItem from="1629891756602" duration="1022000" />
+      <workItem from="1629896617629" duration="6510000" />
     </task>
     <servers />
   </component>
