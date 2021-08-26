@@ -4,33 +4,48 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Components/CapsuleComponent.h"
 #include "DealDamageComponent.generated.h"
 
+//forward delcare classes that we use
+class UCapsuleComponent;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class DUNGEON_API UDealDamageComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+	public:	
 	// Sets default values for this component's properties
 	UDealDamageComponent();
 
 	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-	void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UCapsuleComponent* GetTriggerCapsule() const { return TriggerCapsule; }
-protected:
+
+	bool IsActive() const { return bActive; }
+	void SetActive(bool IsActive)  { bActive = IsActive; }
+
+	protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere)
 	float BaseDamage = 50.0f;
 
+	//the base damage is distributed over this time
+	UPROPERTY(EditAnywhere)
+	float DamageTotalTime = 2.0f;
+
+	//teh time interval at which to apply take damage
+	UPROPERTY(EditAnywhere)
+	float TakeDamageInterval = 0.5f;
+
 	UPROPERTY(EditAnywhere, NoClear)
 	UCapsuleComponent* TriggerCapsule;
+
+	bool bActive = true;
 };

@@ -2,6 +2,7 @@
 
 #include "DungeonPlayerCharacter.h"
 
+#include "DamageHandlerComponent.h"
 #include "HealthComponent.h"
 #include "GameFramework/PlayerController.h"
 
@@ -12,6 +13,7 @@ ADungeonPlayerCharacter::ADungeonPlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	DamageHandlerComponent = CreateDefaultSubobject<UDamageHandlerComponent>(TEXT("DamageHandlerComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -36,6 +38,15 @@ void ADungeonPlayerCharacter::FellOutOfWorld(const class UDamageType& dmgType)
 {
 	OnDeath(true);
 }
+
+void ADungeonPlayerCharacter::SetOnFire(float BaseDamage, float DamageTotalTime, float TakeDamageInterval)
+{
+	if (DamageHandlerComponent)
+	{
+		DamageHandlerComponent->TakeFireDamage(BaseDamage, DamageTotalTime, TakeDamageInterval);
+	}
+}
+
 
 float ADungeonPlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {

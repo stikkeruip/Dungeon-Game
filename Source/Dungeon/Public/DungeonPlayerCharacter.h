@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DamageHandlerComponent.h"
 #include "GameFramework/Character.h"
 #include "DungeonPlayerCharacter.generated.h"
 
@@ -16,6 +17,10 @@ public:
 	// Sets default values for this character's properties
 	ADungeonPlayerCharacter();
 
+	UPROPERTY(EditAnywhere)
+	UParticleSystemComponent* ParticleSystemComponent;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -24,7 +29,8 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	UHealthComponent* HealthComponent;
-
+	UPROPERTY(EditAnywhere)
+	UDamageHandlerComponent* DamageHandlerComponent;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -34,5 +40,7 @@ public:
 
 	virtual void FellOutOfWorld(const class UDamageType& dmgType) override;
 
+	virtual void SetOnFire(float BaseDamage, float DamageTotalTime, float TakeDamageInterval);
+	
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 };
